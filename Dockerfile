@@ -6,7 +6,6 @@ RUN apt-get update && apt-get install -y \
       git \
       libxml2-dev \
       libxslt1-dev \
-      nodejs \
       ruby \
       ruby-dev \
       unzip \
@@ -14,6 +13,7 @@ RUN apt-get update && apt-get install -y \
       zlib1g-dev && \
     apt-get clean && \
     rm -rf /var/lib/apt
+
 
 # Use specific version of shellcheck. It's useful to keep
 # this in sync with the version in Homebrew so macOS developer
@@ -26,11 +26,18 @@ RUN mkdir /tmp/shellcheck && \
     cp shellcheck-v"${SHELLCHECK_VERSION}"/shellcheck /usr/bin/ && \
     rm -rf /tmp/shellcheck
 
-RUN mkdir -p /tmp/terraform && \
-    cd /tmp/terraform && \
-    curl -# -o terraform.zip https://releases.hashicorp.com/terraform/0.9.11/terraform_0.9.11_linux_amd64.zip && \
-    unzip terraform.zip && \
-    mv terraform /usr/local/bin && \
-    rm -rf /tmp/terraform
+# RUN mkdir -p /tmp/terraform && \
+#     cd /tmp/terraform && \
+#     curl -# -o terraform.zip https://releases.hashicorp.com/terraform/0.9.11/terraform_0.9.11_linux_amd64.zip && \
+#     unzip terraform.zip && \
+#     mv terraform /usr/local/bin && \
+#     rm -rf /tmp/terraform
+
+RUN curl -sL https://deb.nodesource.com/setup_12.x | bash - && \
+    curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
+    echo "deb https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list && \
+    apt-get update && apt-get install yarn nodejs && \
+    apt-get clean && \
+    rm -rf /var/lib/apt
 
 RUN pip install pre-commit==1.15.1

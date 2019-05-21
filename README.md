@@ -1,3 +1,7 @@
+fork of https://github.com/CalthorpeAnalytics/docker-pre-commit
+
+with entrypoint removed so it works with GitLab CI
+
 # Docker image for the pre-commit project
 
 This image has the dependencies installed for many of the [supported hooks](http://pre-commit.com/hooks.html)
