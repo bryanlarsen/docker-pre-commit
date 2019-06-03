@@ -6,6 +6,7 @@ RUN apt-get update && apt-get install -y \
       git \
       libxml2-dev \
       libxslt1-dev \
+      rsync \
       ruby \
       ruby-dev \
       unzip \
