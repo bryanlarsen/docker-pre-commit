@@ -1,7 +1,7 @@
 FROM python:3.7.3-stretch
 
 RUN apt-get update && apt-get install -y \
-      build-essential \
+      build-essential libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev \
       curl \
       git \
       libxml2-dev \
